@@ -12,13 +12,14 @@ export default function Interviewer(props)  {
     intClass += "--selected"
   }
   return (
-  <li className={intClass} onClick={() => setInterviewer(props.id)}>
-    <img
-      className={"interviewers__item-image"}
-      src={props.avatar}
-      alt={props.name}
-    />
-    {props.selected ? <h3>{props.name}</h3>:<h2></h2>}
-  </li>)
+    <li className={interviewerClass} onClick={props.setInterviewer}>
+      <img
+        className="interviewers__item-image"
+        src={props.avatar}
+        alt={props.name}
+      />
+      {props.selected && props.name}
+    </li>
+  );
 
 }
