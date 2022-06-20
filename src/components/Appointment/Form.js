@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from 'react';
 import Button from "components/Button.js";
 import InterviewerList from "components/InterviewerList";
 
 export default function Form()  {
+  const [student, setStudent] = useState(props.student || "");
+  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const reset = function() {
+    setStudent("")
+    setInterviewer(null)
+  }
+  const cancel = function() {
+    reset()
+    props.onCancel
+  }
   return (
     <main className="appointment__card appointment__card--create">
   <section className="appointment__card-left">
@@ -16,6 +26,7 @@ export default function Form()  {
           This must be a controlled component
           your code goes here
         */
+       onChange={(event) => setStudent(event.target.value)}
       />
     </form>
     <InterviewerList 
@@ -24,8 +35,8 @@ export default function Form()  {
   </section>
   <section className="appointment__card-right">
     <section className="appointment__actions">
-      <Button danger {/* your code goes here */}>Cancel</Button>
-      <Button confirm {/* your code goes here */}>Save</Button>
+      <Button danger={action(cancel())}>Cancel</Button>
+      <Button confirm>Save</Button>
     </section>
   </section>
 </main>
