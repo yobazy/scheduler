@@ -4,26 +4,22 @@ import axios from "axios";
 import "components/Application.scss";
 import DayList from "components/DayList.js";
 import Appointment from "components/Appointment"
+import useApplicationData from "hooks/useApplicationData"
 
 // import getAppointmentsForDay from "src/helpers/selectors.js";
 import { getInterviews, getAppointmentsForDay, getInterviewsForDay } from "../helpers/selectors.js";
 
 export default function Application(props) {
-  const setDay = day => setState({ ...state, day });
-  const setDays = (days) => {
-    setState(prev => ({ ...prev, days }));
-  } 
-
-  const interviewers = getInterviewsForDay(state, props.interviewer)
-  const appointments = getAppointmentsForDay(state, props.interviewer)
-
-
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {}
   });
+  const setDay = (day) => setState({ ...state, day });
+  // const setDays = (days) => {
+  //   setState(prev => ({ ...prev, days }));
+  // } 
 
   useEffect(() => {
     //axios request here...
@@ -39,54 +35,74 @@ export default function Application(props) {
       console.log('all', all)
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
     });
-  }, []);
+  }, [])
 
-  const schedule = appointments.map((appointment) => {
-    const interview = getInterviews(state, appointment.interview);
+  const bookInterview = (id, interview) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    setState({
+      ...state,
+      appointments
+    });
+  }
+
+  const cancelInterview = {
+
+  }
+  // const {
+  //   state,
+  //   setDay,
+  //   bookInterview,
+  //   cancelInterview
+  // } = useApplicationData();
+
+  const interviewers = getInterviewsForDay(state, state.day);
+  
+  const appointments = getAppointmentsForDay(state, state.day).map(
+    appointment => {
+      return (
+        <Appointment
+          key={appointment.id}
+          {...appointment}
+          interview={getInterviews(state, appointment.interview)}
+          interviewers={interviewers}
+          bookInterview={bookInterview}
+          cancelInterview={cancelInterview}
+        />
+      );
+    }
+  );
   
     return (
-      <Appointment
-        key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
-        interview={interview}
-        interviewers={interviewers}
-      />
+      <main className="layout">
+        <section className="sidebar">
+          <img
+            className="sidebar--centered"
+            src="images/logo.png"
+            alt="Interview Scheduler"
+          />
+          <hr className="sidebar__separator sidebar--centered" />
+          <nav className="sidebar__menu">
+            <DayList days={state.days} day={state.day} setDay={setDay} />
+          </nav>
+          <img
+            className="sidebar__lhl sidebar--centered"
+            src="images/lhl.png"
+            alt="Lighthouse Labs"
+          />
+        </section>
+        <section className="schedule">
+          <section className="schedule">
+            {appointments}
+            <Appointment key="last" time="5pm" />
+          </section>
+        </section>
+      </main>
     );
-  });
-
-
-  return (
-    <main className="layout">
-      <section className="sidebar">
-        <img
-        className="sidebar--centered"
-        src="images/logo.png"
-        alt="Interview Scheduler"
-        />
-      <hr className="sidebar__separator sidebar--centered" />
-      <nav className="sidebar__menu">
-        <DayList
-        days={state.days}
-        value={state.day}
-        onChange={setDay}
-        />
-      </nav>
-      <img
-        className="sidebar__lhl sidebar--centered"
-        src="images/lhl.png"
-        alt="Lighthouse Labs"
-      />
-      </section>
-      <section className="schedule">
-        {Object.values(appointments).map((appointment) => {
-          return(
-          <Appointment 
-          key={appointment.id} 
-          {...appointment} 
-          /> )})}
-        <Appointment key="last" time="5pm" />
-      </section>
-    </main>
-  );
-}
+  }
