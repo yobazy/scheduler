@@ -6,13 +6,14 @@ export default function useVisualMode(initial) {
 
   function transition(nextMode, replace=false) { 
     if(replace) {
-      let newHist = history
+      let newHist = [...history]
       newHist.pop()
       setHistory([...newHist, nextMode])
     } else  {
       setHistory([...history, nextMode])
     }
     setMode(nextMode) 
+    console.log(nextMode)
   }
   function back() { 
     // check if at initial mode

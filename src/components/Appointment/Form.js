@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from "components/Button.js";
 import InterviewerList from "components/InterviewerList";
+import save from "components/Appointment/save.js";
 
 export default function Form(props)  {
   const [student, setStudent] = useState(props.student || "");
@@ -13,6 +14,9 @@ export default function Form(props)  {
     reset()
     props.onCancel()
   }
+  const save = function() {
+    props.onSave(student, interviewer)
+  }
   return (<main className="appointment__card appointment__card--create">
     <section className="appointment__card-left">
       <form autoComplete="off" onSubmit={event => event.preventDefault()}>
@@ -22,6 +26,7 @@ export default function Form(props)  {
           type="text"
           placeholder="Enter Student Name"
           onChange={(event) => setStudent(event.target.value)}
+          data-testid="student-name-input"
         />
       </form>
       <InterviewerList 
@@ -32,8 +37,8 @@ export default function Form(props)  {
     </section>
     <section className="appointment__card-right">
       <section className="appointment__actions">
-        <Button danger onClick={props.onCancel}>Cancel</Button>
-        <Button confirm onClick={props.onSave}>Save</Button>
+        <Button danger onClick={cancel}>Cancel</Button>
+        <Button confirm onClick={save}>Save</Button>
       </section>
     </section>
   </main>
