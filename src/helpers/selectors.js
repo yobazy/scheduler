@@ -11,30 +11,38 @@ export function getAppointmentsForDay(state, day) {
       apps = dayObj.appointments;
     }
   }
-  console.log('Apps', apps)
   if (typeof apps == 'undefined')  {
     appArr = []
     return appArr;
   }
-  console.log(typeof apps == 'undefined')
   for (let id of apps)  {
-    console.log(state.appointments[id])
     appArr.push(state.appointments[id]);
+  }
+  return appArr;
+}
+
+export function getInterviewsForDay(state, day) {
+  let appArr = getAppointmentsForDay(state, day)
+  //... returns an array of appointment objects for that day
+  let intArr = [];
+  let ints;
+  // iterate over all the days 
+  if (appArr.length == 0)  {
+    return intArr;
   }
   return appArr;
 }
   
 export function getInterviews(state, interview) {
+  if (interview == null) {
+    return null;
+  }
+  let interviewArr = {};
+  interviewArr.student = interview.student;
 
-// }
-  // for (let id of apps)  {
-  //   appArr.push(state.appointments[id])
-  //   // for (let appointment of state.appointments)  {
-  //   //   if (id === state.appointments)  {
-  //   //     appArr[id] = state.app
-  // }
-  // // }
-  //   // for each app in states.appointments
-  //   // if (id = )
-  // return appArr;
+  const interviewerID = interview.interviewer 
+  const interviewers = state.interviewers
+  interviewArr.interviewer = interviewers[interviewerID];
+  return interviewArr;
 }
+
