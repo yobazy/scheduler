@@ -3,7 +3,6 @@ import "components/DayListItem.scss";
 import classNames from "classnames";
 
 export default function DayListItem(props) {
-console.log("🚀 ~ file: DayListItem.js ~ line 6 ~ DayListItem ~ props", props)
   
   const formatSpots = function(spots)  {
     if (spots === 0){
