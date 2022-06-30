@@ -23,8 +23,6 @@ export default function useApplicationData() {
       axios.get(appURL),
       axios.get(intURL)
     ]).then((all) => {
-      console.log("🚀 ~ file: Application.js ~ line 36 ~ ]).then ~ all", all)
-      console.log('all', all)
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
     });
   }, [])
