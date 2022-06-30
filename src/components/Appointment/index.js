@@ -10,24 +10,25 @@ import useVisualMode from "hooks/useVisualMode.js"
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVING = "SAVING";
 
 export default function Appointment(props) {
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );
+
   function save(name, interviewer) {
     const interview = {
       student: name,
       interviewer
     };
-    const id = 1
-    // props.bookInterview(id, interview)
-    // transition(EMPTY)
-    // return interview;
+    // transition(SAVING)
+    props.bookInterview(props.id, interview).then(() => {
+      transition(SHOW)
+    })
     console.log("🚀 ~ file: index.js ~ line 25 ~ save ~ interview", interview)
   }
 
-
-  const { mode, transition, back } = useVisualMode(
-    props.interview ? SHOW : EMPTY
-  );
   const onAdd = () => {
     transition(CREATE)
   }
@@ -41,8 +42,6 @@ export default function Appointment(props) {
     {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
     {mode === CREATE && (
       <Form 
-      student={props.student} 
-      interviewer={props.interviewer} 
       interviewers={props.interviewers} 
       onCancel={back}
       onSave={save}/>
