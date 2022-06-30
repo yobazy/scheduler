@@ -4,6 +4,7 @@ import Header from "components/Appointment/Header.js"
 import Show from "components/Appointment/Show.js"
 import Empty from "components/Appointment/Empty.js"
 import Form from "components/Appointment/Form.js"
+import Error from "components/Appointment/Error.js"
 import Status from "components/Appointment/Status.js"
 import Confirm from "components/Appointment/Confirm.js"
 import useVisualMode from "hooks/useVisualMode.js"
@@ -39,11 +40,13 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    transition(SAVING)
-    props.bookInterview(props.id, interview).then(() => {
-      transition(SHOW)
-    })
-    console.log("🚀 ~ file: index.js ~ line 25 ~ save ~ interview", interview)
+  
+    transition(SAVING);
+  
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(error => transition(ERROR_SAVE, true));
   }
 
   function edit() {
@@ -91,5 +94,17 @@ export default function Appointment(props) {
           onCancel={back}
         />
       }
+        {mode === ERROR_SAVE && 
+    <Error 
+      message="Could not create appointment"
+      onClose={back}
+    />
+  }
+  {mode === ERROR_DELETE && 
+    <Error 
+      message="Could not cancel appointment"
+      onClose={back}
+    />
+  }
   </article>);
 }
