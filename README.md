@@ -31,6 +31,7 @@ http://localhost:8000/
 
 ## Screenshots
 
+
 ## Tech Stack 
 - React 
 - Javascript
@@ -38,3 +39,7 @@ http://localhost:8000/
 - HTML
 
 ## Dependencies
+- react
+- axios
+- @testing-library/react-hooks
+- react-test-renderer
