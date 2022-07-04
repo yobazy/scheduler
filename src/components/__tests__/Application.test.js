@@ -119,10 +119,6 @@ describe("Application", () => {
 
     fireEvent.click(queryByAltText(appointment, "Close"));
 
-    expect(getByText(appointment, "Save")).toBeInTheDocument();
-
-    fireEvent.click(queryByText(appointment, "Cancel"))
-
     expect(getByText(container, "Archie Cohen")).toBeInTheDocument();
 
     const day = getAllByTestId(container, "day").find(day =>
