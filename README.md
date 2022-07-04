@@ -30,7 +30,14 @@ The app can be viewed at the following URL once setup:
 http://localhost:8000/
 
 ## Screenshots
+Main page overview:
+!["Main Page Overview"](https://github.com/youthbazzy/scheduler/blob/master/docs/scheduler-main.png?raw=true)
 
+Editing appointments:
+!["Editing appointmnet"](https://github.com/youthbazzy/scheduler/blob/master/docs/scheduler-edit.png?raw=true)
+
+Confirm edits:
+!["Confirm edits screen"](https://github.com/youthbazzy/scheduler/blob/master/docs/scheduler-confirm.png?raw=true)
 
 ## Tech Stack 
 - React 
