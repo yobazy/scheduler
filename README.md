@@ -1,14 +1,7 @@
 # Interview Scheduler
 
 ## Overview
-
-## URLs
-
-## Screenshots
-
-## Tech Stack 
-
-## Dependencies
+The Interview Scheduler is a react app that allows users to view, book and cancel appointments with mentors (interviewers) for each day throughout the week.
 
 ## Setup
 
@@ -31,3 +24,17 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## URLs
+The app can be viewed at the following URL once setup:
+http://localhost:8000/
+
+## Screenshots
+
+## Tech Stack 
+- React 
+- Javascript
+- CSS/SCSS
+- HTML
+
+## Dependencies
