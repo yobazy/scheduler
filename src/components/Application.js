@@ -50,6 +50,7 @@ export default function Application(props) {
           setDay={setDay}
           bookInterview={bookInterview}
           cancelInterview={cancelInterview}
+          value={state.day}
         />
         </nav>
         <img
