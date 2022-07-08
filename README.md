@@ -7,6 +7,8 @@ The Interview Scheduler is a react app that allows users to view, book and cance
 
 Install dependencies with `npm install`.
 
+Run scheduler-api on host machine prior to running webpack server.
+
 ### Running Webpack Development Server
 
 ```sh
