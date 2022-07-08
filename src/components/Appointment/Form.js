@@ -28,6 +28,10 @@ export default function Form(props) {
       setError("Student name cannot be blank")
       return;
     }
+    if (!currentInterviewer) {
+      setError("Please select interviewer")
+      return;
+    }
     setError("")
     props.onSave(currentName, currentInterviewer);
   }
@@ -43,11 +47,7 @@ export default function Form(props) {
             onChange={(event) => setName(event.target.value)}            
             value={currentName}
             placeholder="Enter Student Name"
-            // placeholder={currentName ? currentName : "Enter Student Name"}
             data-testid="student-name-input"
-            /*
-              This must be a controlled component
-            */
           />
         <section className="appointment__validation">{error}</section>
         </form>

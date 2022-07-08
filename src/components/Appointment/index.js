@@ -40,7 +40,6 @@ export default function Appointment(props) {
   }, [mode, transition, props.interview])
 
   function save(name, interviewer) {
-    console.log('save')
     if (name && interviewer) {
       transition(SAVING);
 
@@ -112,13 +111,13 @@ export default function Appointment(props) {
       {mode === ERROR_SAVE && 
         <Error 
           message="Could not create appointment"
-          onClose={back}
+          onClose={edit}
         />
       }
       {mode === ERROR_DELETE && 
         <Error 
           message="Could not cancel appointment"
-          onClose={back}
+          onClose={() => back()}
         />
       }
     </article>
