@@ -12,11 +12,9 @@ export default function useVisualMode(initial) {
     } else  {
       setHistory([...history, nextMode])
     }
-    setMode(nextMode) 
-    console.log(nextMode)
+    setMode(nextMode)
   }
   function back() { 
-    // check if at initial mode
     if (mode === initial) {
       return mode;
     }

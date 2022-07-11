@@ -111,7 +111,7 @@ export default function Appointment(props) {
       {mode === ERROR_SAVE && 
         <Error 
           message="Could not create appointment"
-          onClose={edit}
+          onClose={() => back()}
         />
       }
       {mode === ERROR_DELETE && 
