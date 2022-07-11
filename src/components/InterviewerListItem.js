@@ -2,10 +2,6 @@ import React from "react";
 import "components/InterviewerListItem.scss";
 
 export default function Interviewer(props)  {
-  const setInterviewer = (id) => {};
-  function Name(props) { 
-    return (props.selected && <h1>{props.name}</h1>);
-  }
 
   let intClass = "interviewers__item"
   if(props.selected)  {

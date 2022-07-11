@@ -1,11 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
-import { render, cleanup, waitForElement, wait, fireEvent, queryByAltText, getByText, getByAltText, getAllByTestId, prettyDOM, getByPlaceholderText, queryByText, queryAllByAltText } from "@testing-library/react";
+import { render, cleanup, waitForElement, wait, fireEvent, queryByAltText, getByText, getByAltText, getAllByTestId, getByPlaceholderText, queryByText } from "@testing-library/react";
 
 import axios from 'axios';
 import Application from "components/Application";
-import Empty from "components/Appointment/Empty";
 
 beforeEach(() => {
   jest.resetModules();
